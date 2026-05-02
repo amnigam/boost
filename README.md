@@ -50,6 +50,26 @@ Notes:
 
 ## Run
 
+### As a CLI command (after install)
+
+```powershell
+boost-scan httpx@0.28.1
+```
+
+Or with the interactive prompt (no argument):
+
+```powershell
+boost-scan
+```
+
+### Directly with Python
+
+```powershell
+python main.py httpx@0.28.1
+```
+
+Or interactively:
+
 ```powershell
 python main.py
 ```
@@ -146,8 +166,8 @@ The older SSE transport (`sse_client`) is not compatible with this endpoint and 
 - **Validation argument errors:**
 	- Include an exact version (e.g. `0.28.1`, not `latest`)
 	- Check the input format matches a supported pattern
-- **Empty input:**
-	- Script exits with `No Package entered. Exiting.`
+- **Empty input or missing argument:**
+	- `boost-scan` (with no argument and no interactive input) prints help and exits with code 1
 
 ## Running Tests
 
@@ -155,14 +175,17 @@ The older SSE transport (`sse_client`) is not compatible with this endpoint and 
 python -m unittest discover -s tests -p "test_*.py" -v
 ```
 
-The test suite in `tests/test_package_input_parser.py` covers all supported input formats and invalid cases for the parser.
+The test suite covers:
+- `tests/test_package_input_parser.py` — all supported input formats and invalid cases for the parser
+- `tests/test_main.py` — unit tests for the main module
 
 ## File Overview
 
 | File | Purpose |
 |---|---|
-| `main.py` | Interactive scanner entry point |
+| `main.py` | CLI (`boost-scan`) and interactive scanner entry point |
 | `package_input_parser.py` | Input normalisation logic and format parsing |
 | `tests/test_package_input_parser.py` | Unit tests for the parser |
-| `pyproject.toml` | Project metadata and dependencies |
+| `tests/test_main.py` | Unit tests for the main module |
+| `pyproject.toml` | Project metadata, dependencies, and `boost-scan` script entry point |
 | `.env` | Local secrets (not committed) |

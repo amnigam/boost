@@ -8,3 +8,9 @@ dependencies = [
     "httpx>=0.28.1",
     "mcp>=1.27.0",
 ]
+
+[tool.setuptools]
+py-modules = ["main", "package_input_parser"]
+
+[project.scripts]
+boost-scan = "main:cli"
